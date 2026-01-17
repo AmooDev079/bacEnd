@@ -21,9 +21,7 @@ let app = express();
 //     }
 // })
 
-const corsOptions = {
-origin: 'https://localhost/3002', // Allow only this origin
-};
+
 
 app.use(express.static('frontend'))
 app.use(cors())
@@ -35,7 +33,7 @@ let server = http.createServer(app);
 //connecting server to socket
 let io = new WebSocket.Server(server,{
   cors: {
-    origin: ["http://192.168.230.173:5173"]
+    origin: ["https://froend-1.onrender.com"]
   }})
 
 let currUser;
