@@ -6,20 +6,20 @@ let mysql = require('mysql');
 let app = express();
 
 //creating database
-let con = mysql.createConnection({
-    database:'chatapp',
-    password:'password',
-    host:'localhost',
-    user:'root'
-})
+// let con = mysql.createConnection({
+//     database:'chatapp',
+//     password:'password',
+//     host:'localhost',
+//     user:'root'
+// })
 //coonecting to databas
-con.connect(function(err){
-    if(err){
-        console.log('errr',err)
-    }else{
-        console.log("database connected")
-    }
-})
+// con.connect(function(err){
+//     if(err){
+//         console.log('errr',err)
+//     }else{
+//         console.log("database connected")
+//     }
+// })
 
 const corsOptions = {
 origin: 'https://localhost/3002', // Allow only this origin
@@ -52,12 +52,12 @@ io.on('connection',function(socket){
     socket.on('signin',(data)=>{
         console.log(data)
         if(data.uName !==''){
-            con.query('insert into userinfo (name,password) values("'+data.uName+'", "'+
-                data.pass+'");',(err,result)=>{
-                    if(err){
-                        console.log('From sql',err)
-                    }else{console.log('signed in')}
-                })
+            // con.query('insert into userinfo (name,password) values("'+data.uName+'", "'+
+            //     data.pass+'");',(err,result)=>{
+            //         if(err){
+            //             console.log('From sql',err)
+            //         }else{console.log('signed in')}
+            //     })
             socket.emit('signedIn',data)
         }else{
             return
@@ -68,23 +68,7 @@ io.on('connection',function(socket){
 app.post('/loginin',(req,res)=>{
 
     if(req.body!==null){
-        con.query('select * from userinfo where name ="'+
-        req.body.u+'";',(err,result)=>{
-            if(err){
-            console.log(err)
-            } if(result[0]!==undefined){
-                if(result[0].name==req.body.u){
-
-                     res.json({name:req.body.u})
-                     console.log("Cofirmed")
-                 }
-
-            }else{
-                        res.status(401)
-                        console.log("RESSSSSSSULTSNNNNNNNNNN")
-        }
-        
-    })
+        res.json({name:req.body.u})
     }
     else{
         res.status(401)
@@ -97,14 +81,14 @@ app.post('/loginin',(req,res)=>{
         console.log(data)
         let sql = 'insert into msgs (msgfrom,msgto,msg) values("'+
         data.from+'", "'+data.to+'", "'+data.text+'");';
-        con.query(sql,(err,result)=>{
-            if(!err){
-                console.log("Saved")
+        // con.query(sql,(err,result)=>{
+        //     if(!err){
+        //         console.log("Saved")
 
-            }else{
-                console.log('err saving',err)
-            }
-        })
+        //     }else{
+        //         console.log('err saving',err)
+        //     }
+        // })
         data.st = true
         data.id=Date.now();
         socket.broadcast.emit("msgReceived",data)
@@ -120,15 +104,15 @@ app.post('/loginin',(req,res)=>{
 
     ///fetch chatters
     socket.on("hello",(d)=>{
-        con.query('select name from userinfo;',(err,results)=>{
-            if(!err){console.log('ddddddd',results)}else{console.log(err)}
-            let c =[]
-            results.forEach(element => {
-               c.push(element.name) 
-            })
-            console.log(c)
-            socket.emit('chhaters',c)
-        })
+        // con.query('select name from userinfo;',(err,results)=>{
+        //     if(!err){console.log('ddddddd',results)}else{console.log(err)}
+        //     let c =[]
+        //     results.forEach(element => {
+        //        c.push(element.name) 
+        //     })
+        //     console.log(c)
+        // })
+         socket.emit('chhaters',c)
     })
 
     
