@@ -45,7 +45,7 @@ res.send("Welcome from Back")
 
 //connecting to socket
 io.on('connection',function(socket){
-    console.log("connected",socket.id)
+    console.log("connected--->>",socket.id)
    //signin part
     socket.on('signin',(data)=>{
         console.log(data)
@@ -110,7 +110,7 @@ app.post('/loginin',(req,res)=>{
         //     })
         //     console.log(c)
         // })
-         socket.emit('chhaters',c)
+        // socket.emit('chhaters',c)
     })
 
     
@@ -134,6 +134,6 @@ server.listen("3002","0.0.0.0",(err)=>{
     if(err){
         console.log("Error" ,err);
     }else{
-        console.log("live at http://192.168.230.173:3002")
+        console.log("live at ")https://froend-1.onrender.com
     }
 })
