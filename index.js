@@ -134,6 +134,6 @@ server.listen("3002","0.0.0.0",(err)=>{
     if(err){
         console.log("Error" ,err);
     }else{
-        console.log("live at ")https://froend-1.onrender.com
+        console.log("live at https://froend-1.onrender.com")
     }
 })
